@@ -17,7 +17,7 @@ function Navbar() {
     setIsLoggedIn(false);
     navigate("/login");
   };
-  
+
   const activeLink = (path) =>
     location.pathname === path
       ? "text-purple-400 font-semibold border-b-2 border-purple-500 pb-1"
@@ -25,21 +25,25 @@ function Navbar() {
 
   return (
     <nav className="bg-gray-900 text-white px-8 py-4 flex justify-between items-center shadow-md fixed w-full top-0 z-50">
-      {/* ✅ Logo */}
-      <Link
-        to="/"
-        className="text-2xl font-extrabold text-purple-400 flex items-center gap-1 hover:text-purple-300 transition-all"
-      >
-        ProTasker 🚀
+      
+      {/* ✅ Logo + Title */}
+      <Link to="/" className="flex items-center gap-3">
+        <img
+          src="/assets/protasker-logo.png"
+          alt="ProTasker Logo"
+          className="w-10 h-10 rounded-full object-cover"
+        />
+        <span className="text-2xl font-extrabold text-purple-400 hover:text-purple-300 transition-all">
+          ProTasker
+        </span>
       </Link>
 
-      {/* ✅ Navigation Links */}
+      {/* Navigation Links */}
       <div className="flex items-center space-x-8 text-lg font-medium">
         <Link to="/" className={activeLink("/")}>
           Home
         </Link>
 
-        {/* 🔒 Show Dashboard + Projects only when logged in */}
         {isLoggedIn && (
           <>
             <Link to="/dashboard" className={activeLink("/dashboard")}>
@@ -52,7 +56,6 @@ function Navbar() {
           </>
         )}
 
-        {/* 👤 Auth links (only if logged out) */}
         {!isLoggedIn && (
           <>
             <Link to="/login" className={activeLink("/login")}>
@@ -64,7 +67,6 @@ function Navbar() {
           </>
         )}
 
-        {/* 🚪 Logout button (only if logged in) */}
         {isLoggedIn && (
           <button
             onClick={handleLogout}

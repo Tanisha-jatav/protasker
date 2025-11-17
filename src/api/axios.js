@@ -1,15 +1,17 @@
 import axios from "axios";
 
+// 🔥 LIVE BACKEND URL (Render)
 const API = axios.create({
-  baseURL: "http://localhost:5001/api",
+  baseURL: "https://protasker-server.onrender.com/api", 
   withCredentials: false,
 });
 
+// 🔐 Automatically attach token
 API.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
 
-    config.headers["Content-Type"] = "application/json"; 
+    config.headers["Content-Type"] = "application/json";
     config.headers.Accept = "application/json";
 
     if (token) {
@@ -23,6 +25,7 @@ API.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+// 🚫 If token expires → auto logout
 API.interceptors.response.use(
   (res) => res,
   (err) => {
