@@ -22,21 +22,17 @@ const allowedOrigins = [
   "https://protasker-*.vercel.app",       // in case vercel uses preview domains
 ];
 
-// 🟣 CORS FIX — Works on Render + Vercel
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin) || origin.includes("vercel.app")) {
-        callback(null, true);
-      } else {
-        callback(new Error("CORS Not Allowed"));
-      }
-    },
+    origin: [
+      "http://localhost:3000",
+      "https://protasker-tau.vercel.app"   // <- YOUR FRONTEND VERCEL URL
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
   })
 );
+
 
 app.use(express.json({ limit: "15mb" }));
 

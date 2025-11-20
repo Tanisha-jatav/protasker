@@ -2,9 +2,9 @@ import axios from "axios";
 
 // LIVE BACKEND URL (Render)
 const API = axios.create({
-  baseURL: process.env.REACT_APP_API_URL, 
-  withCredentials: false,
+  baseURL: process.env.REACT_APP_API_URL + "/api",
 });
+
 
 // Automatically attach token
 API.interceptors.request.use(
