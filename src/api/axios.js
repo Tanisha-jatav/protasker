@@ -1,12 +1,12 @@
 import axios from "axios";
 
-// 🔥 LIVE BACKEND URL (Render)
+// LIVE BACKEND URL (Render)
 const API = axios.create({
-  baseURL: "https://protasker-server.onrender.com/api", 
+  baseURL: process.env.REACT_APP_API_URL, 
   withCredentials: false,
 });
 
-// 🔐 Automatically attach token
+// Automatically attach token
 API.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
@@ -25,7 +25,7 @@ API.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// 🚫 If token expires → auto logout
+// If token expires - auto logout
 API.interceptors.response.use(
   (res) => res,
   (err) => {
